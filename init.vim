@@ -139,10 +139,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath^=dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin(expand('dein'))
+call dein#begin(expand('~/.config/nvim/dein'))
 
 " Let dein manage dein
 " Required:
@@ -153,7 +153,23 @@ call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 
 " You can specify revision/branch/tag.
-call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+call dein#add('scrooloose/nerdtree')
+call dein#add('vim-scripts/L9')
+call dein#add('vim-scripts/FuzzyFinder')
+call dein#add('itchyny/lightline.vim')
+call dein#add('easymotion/vim-easymotion')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-fugitive')
+call dein#add('airblade/vim-gitgutter')
+call dein#add('Xuyuanp/nerdtree-git-plugin')
+call dein#add('elentok/plaintasks.vim')
+call dein#add('dhruvasagar/vim-dotoo')
+call dein#add('jiangmiao/auto-pairs')
+" -- Web Development
+call dein#add('mattn/emmet-vim')
+call dein#add('skammer/vim-css-color')
+call dein#add('hail2u/vim-css3-syntax')
+call dein#add('digitaltoad/vim-pug')
 
 " Required:
 call dein#end()
@@ -167,23 +183,6 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
-
-" start plugin defintion
-call dein#add('scrooloose/nerdtree')
-call dein#add('vim-scripts/L9')
-call dein#add('vim-scripts/FuzzyFinder')
-call dein#add('itchyny/lightline.vim')
-call dein#add('easymotion/vim-easymotion')
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-fugitive')
-call dein#add('airblade/vim-gitgutter')
-call dein#add('Xuyuanp/nerdtree-git-plugin')
-call dein#add('elentok/plaintasks.vim')
-" -- Web Development
-call dein#add('mattn/emmet-vim')
-call dein#add('skammer/vim-css-color')
-call dein#add('hail2u/vim-css3-syntax')
-call dein#add('digitaltoad/vim-pug')
 
 " start NERDTree on start-up and focus active window
 "autocmd VimEnter * NERDTree
