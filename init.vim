@@ -52,11 +52,16 @@ set lazyredraw
 nnoremap <Space> <nop>
 
 " set , as mapleader
-let mapleader = " "
+let mapleader = ","
 
-" map <leader>q and <leader>w to buffer prev/next buffer
-noremap <leader>q :bp<CR>
-noremap <leader>w :bn<CR>
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 " windows like clipboard
 " yank to and paste from the clipboard without prepending "* to commands
@@ -78,7 +83,7 @@ vmap <S-Tab> <gv
 
 " remove the .ext~ files, but not the swapfiles
 set nobackup
-set writebackup
+set nowb
 set noswapfile
 
 " search settings
@@ -100,10 +105,24 @@ set scrolloff=3
 
 " indentation
 set expandtab       " use spaces instead of tabs
+set smarttab
 set autoindent      " autoindent based on line above, works most of the time
 set smartindent     " smarter indent for C-like languages
 set shiftwidth=4    " when reading, tabs are 4 spaces
 set softtabstop=4   " in insert mode, tabs are 4 spaces
+
+map <space> /
+map <C-space> ?
+map <silent> <leader><cr> :noh<cr>
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
 
 " no lines longer than 80 cols
 set textwidth=80
@@ -163,6 +182,7 @@ call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 
 " You can specify revision/branch/tag.
+call dein#add('takac/vim-hardtime')
 call dein#add('scrooloose/nerdtree')
 call dein#add('vim-scripts/L9')
 call dein#add('vim-scripts/FuzzyFinder')
@@ -203,7 +223,7 @@ noremap <leader>b :FufBuffer<cr>
 noremap <leader>f :FufFile<cr>
 
 " use zencoding with <C-E>
-let g:user_emmet_leader_key = '<c-e>'
+let g:user_emmet_leader_key = '<C-e>'
 
 " set the color theme to wombat256i
 " set background=dark
