@@ -20,6 +20,13 @@ set autoread
 set encoding=utf-8
 set fileencoding=utf-8
 
+" Unbind the cursor keys in insert, normal and visual modes.
+for prefix in ['i', 'n', 'v']
+  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+    exe prefix . "noremap " . key . " <Nop>"
+  endfor
+endfor
+
 " by default, in insert mode backspace won't delete over line breaks, or
 " automatically-inserted indentation, let's change that
 set backspace=indent,eol,start
@@ -41,8 +48,11 @@ set lazyredraw
 "  The following are some extra mappings/configs to enhance my personal
 "  VIM experience
 
+" unmap spacebar in normal mode
+nnoremap <Space> <nop>
+
 " set , as mapleader
-let mapleader = "\Space"
+let mapleader = " "
 
 " map <leader>q and <leader>w to buffer prev/next buffer
 noremap <leader>q :bp<CR>
