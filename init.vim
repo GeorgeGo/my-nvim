@@ -7,6 +7,32 @@
 syntax on
 " and show line numbers
 set number
+set showcmd
+set cursorline
+set wildmenu
+set lazyredraw
+set showmatch
+
+" search settings
+set incsearch        " find the next match as we type the search
+set hlsearch         " hilight searches by default
+" use ESC to remove search higlight
+nnoremap <leader><space> :nohlsearch<CR>
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
+
+" set , as mapleader
+let mapleader = ","
 
 " make vim try to detect file types and load plugins for them
 filetype on
@@ -40,19 +66,12 @@ set fileformats=unix,dos
 " save up to 100 marks, enable capital marks
 set viminfo='100,f1
 
-" screen will not be redrawn while running macros, registers or other
-" non-typed comments
-set lazyredraw
-
 " ---------------------- CUSTOMIZATION ----------------------
 "  The following are some extra mappings/configs to enhance my personal
 "  VIM experience
 
 " unmap spacebar in normal mode
 nnoremap <Space> <nop>
-
-" set , as mapleader
-let mapleader = ","
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
@@ -62,15 +81,6 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-" windows like clipboard
-" yank to and paste from the clipboard without prepending "* to commands
-let &clipboard = has('unnamedplus') ? 'unnamedplus' : 'unnamed'
-" map c-x and c-v to work as they do in windows, only in insert mode
-vm <c-x> "+x
-vm <c-c> "+y
-cno <c-v> <c-r>+
-exe 'ino <script> <C-V>' paste#paste_cmd['i']
 
 " save with ctrl+s
 nmap <c-s> :w<CR>
@@ -85,12 +95,6 @@ vmap <S-Tab> <gv
 set nobackup
 set nowb
 set noswapfile
-
-" search settings
-set incsearch        " find the next match as we type the search
-set hlsearch         " hilight searches by default
-" use ESC to remove search higlight
-nnoremap <esc> :noh<return><esc>
 
 " most of the time I should use ` instead of ' but typing it with my keyabord
 " is a pain, so just toggle them
@@ -109,6 +113,7 @@ set smarttab
 set autoindent      " autoindent based on line above, works most of the time
 set smartindent     " smarter indent for C-like languages
 set shiftwidth=4    " when reading, tabs are 4 spaces
+set tabstop=4
 set softtabstop=4   " in insert mode, tabs are 4 spaces
 
 map <space> /
@@ -121,8 +126,10 @@ map <leader>bd :Bclose<cr>:tabclose<cr>gT
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
 
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+map <C-J> :bnext<CR>
+map <C-K> :bprev<CR>
+map <C-L> :tabn<CR>
+map <C-H> :tabp<CR>
 
 " no lines longer than 80 cols
 set textwidth=80
@@ -224,6 +231,9 @@ noremap <leader>f :FufFile<cr>
 
 " use zencoding with <C-E>
 let g:user_emmet_leader_key = '<C-e>'
+
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " set the color theme to wombat256i
 " set background=dark
