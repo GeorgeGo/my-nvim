@@ -12,12 +12,15 @@ set cursorline
 set wildmenu
 set lazyredraw
 set showmatch
+set vb t_vb=
+
+" set , as mapleader
+let mapleader = ","
 
 " search settings
 set incsearch        " find the next match as we type the search
 set hlsearch         " hilight searches by default
-" use ESC to remove search higlight
-nnoremap <leader><Space> :nohlsearch<CR>
+nnoremap <silent> <leader><Space> :nohlsearch<CR>
 
 " move vertically by visual line
 nnoremap j gj
@@ -30,9 +33,6 @@ nnoremap E $
 " $/^ doesn't do anything
 nnoremap $ <nop>
 nnoremap ^ <nop>
-
-" set , as mapleader
-let mapleader = ","
 
 " make vim try to detect file types and load plugins for them
 filetype on
@@ -122,10 +122,9 @@ set softtabstop=4   " in insert mode, tabs are 4 spaces
 
 map <space> /
 map <C-space> ?
-map <silent> <leader><cr> :noh<cr>
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>bd :bd<CR>
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
@@ -179,6 +178,7 @@ call dein#begin(expand('~/.config/nvim/dein'))
 call dein#add('Shougo/dein.vim')
 
 " You can specify revision/branch/tag.
+call dein#add('xolox/vim-misc')
 call dein#add('xolox/vim-easytags')
 call dein#add('SirVer/ultisnips')
 call dein#add('ervandew/supertab')
@@ -225,6 +225,7 @@ noremap <leader>f :CtrlP<cr>
 
 " use zencoding with <C-E>
 let g:user_emmet_leader_key = '<C-e>'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
