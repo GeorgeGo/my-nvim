@@ -17,7 +17,7 @@ set showmatch
 set incsearch        " find the next match as we type the search
 set hlsearch         " hilight searches by default
 " use ESC to remove search higlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader><Space> :nohlsearch<CR>
 
 " move vertically by visual line
 nnoremap j gj
@@ -52,6 +52,10 @@ for prefix in ['i', 'n', 'v']
     exe prefix . "noremap " . key . " <Nop>"
   endfor
 endfor
+
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>gc :Gcommit<CR>
 
 " by default, in insert mode backspace won't delete over line breaks, or
 " automatically-inserted indentation, let's change that
@@ -155,16 +159,6 @@ autocmd BufNewFile,BufRead *.jade setlocal ft=jade
 " just map it to <f9>
 set pastetoggle=<f9>
 
-" if windows...
-if has('win32')
-" start maximized
-autocmd GUIEnter * simalt ~x
-" also use .vim instead of vimfiles, make sure to run the following command
-" once this was copied to /Users/<user>/.vim
-"  mklink %homepath%/.vimrc %homepath%/.vim/.vimrc
-let &runtimepath.=',$HOME/.vim'
-endif
-
 " select all mapping
 noremap <leader>a ggVG
 
@@ -184,15 +178,17 @@ call dein#begin(expand('~/.config/nvim/dein'))
 " Required:
 call dein#add('Shougo/dein.vim')
 
-" Add or remove your plugins here:
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-
 " You can specify revision/branch/tag.
+call dein#add('xolox/vim-easytags')
+call dein#add('SirVer/ultisnips')
+call dein#add('ervandew/supertab')
 call dein#add('takac/vim-hardtime')
 call dein#add('scrooloose/nerdtree')
+call dein#add('scrooloose/syntastic')
+call dein#add('ctrlpvim/ctrlp.vim')
+call dein#add('majutsushi/tagbar')
+call dein#add('pangloss/vim-javascript')
 call dein#add('vim-scripts/L9')
-call dein#add('vim-scripts/FuzzyFinder')
 call dein#add('itchyny/lightline.vim')
 call dein#add('easymotion/vim-easymotion')
 call dein#add('tpope/vim-surround')
@@ -200,13 +196,11 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('elentok/plaintasks.vim')
-call dein#add('dhruvasagar/vim-dotoo')
 call dein#add('jiangmiao/auto-pairs')
 " -- Web Development
 call dein#add('mattn/emmet-vim')
-call dein#add('skammer/vim-css-color')
+call dein#add('ap/vim-css-color')
 call dein#add('hail2u/vim-css3-syntax')
-call dein#add('digitaltoad/vim-pug')
 
 " Required:
 call dein#end()
@@ -225,9 +219,9 @@ endif
 "autocmd VimEnter * NERDTree
 "autocmd VimEnter * wincmd p
 
-" map FuzzyFinder
-noremap <leader>b :FufBuffer<cr>
-noremap <leader>f :FufFile<cr>
+" map CtrlP
+noremap <leader>b :CtrlPBuffer<cr>
+noremap <leader>f :CtrlP<cr>
 
 " use zencoding with <C-E>
 let g:user_emmet_leader_key = '<C-e>'
